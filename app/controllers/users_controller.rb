@@ -2,7 +2,8 @@ class UsersController < ApplicationController
 	
 	def index
 
-		@firstuser = User.first
-	
+		@firstuser = User.first	
+		@firstascore = ApplicationScore.first
+
 	end
 end

@@ -1,3 +1,3 @@
 class Skill < ApplicationRecord
-  self.table_name= "Cities"
+  self.table_name= "Skills"
 end
