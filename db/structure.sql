@@ -1642,7 +1642,8 @@ CREATE TABLE "JobCategories" (
     "bannerPic" character varying(255),
     "createdAt" timestamp with time zone NOT NULL,
     "updatedAt" timestamp with time zone NOT NULL,
-    "customGroupJobCategories" jsonb DEFAULT '{}'::jsonb
+    "customGroupJobCategories" jsonb DEFAULT '{}'::jsonb,
+    banner_pic character varying
 );
 
 
@@ -2093,7 +2094,8 @@ CREATE TABLE "JobTitles" (
     "bannerPic" character varying(255),
     "JobCategoryId" integer,
     "createdAt" timestamp with time zone NOT NULL,
-    "updatedAt" timestamp with time zone NOT NULL
+    "updatedAt" timestamp with time zone NOT NULL,
+    banner_pic character varying
 );
 
 
@@ -2734,8 +2736,8 @@ ALTER SEQUENCE "Scores_id_seq" OWNED BY "Scores".id;
 CREATE TABLE "Skills" (
     id integer NOT NULL,
     name character varying(255),
-    "createdAt" timestamp without time zone NOT NULL,
-    "updatedAt" timestamp without time zone NOT NULL
+    "createdAt" timestamp with time zone NOT NULL,
+    "updatedAt" timestamp with time zone NOT NULL
 );
 
 
@@ -5398,6 +5400,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171024044029'),
 ('20171024044356'),
 ('20171024094423'),
-('20171024125045');
+('20171024125045'),
+('20171024234446'),
+('20171024235221');
 
 
