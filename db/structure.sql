@@ -2129,7 +2129,7 @@ CREATE TABLE "Jobs" (
     "bannerPic" character varying(255),
     intro character varying(255),
     location character varying(255),
-    type "enum_Jobs_type" NOT NULL,
+    jobtype "enum_Jobs_type" NOT NULL,
     "durationLegacy" character varying(255),
     "salaryLegacy" character varying(255),
     attachments jsonb DEFAULT '[]'::jsonb NOT NULL,
@@ -2930,6 +2930,39 @@ ALTER SEQUENCE "Users_id_seq" OWNED BY "Users".id;
 
 
 --
+-- Name: application_scores; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE application_scores (
+    id bigint NOT NULL,
+    application_id bigint,
+    job_id bigint,
+    ascore numeric,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: application_scores_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE application_scores_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: application_scores_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE application_scores_id_seq OWNED BY application_scores.id;
+
+
+--
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2942,12 +2975,146 @@ CREATE TABLE ar_internal_metadata (
 
 
 --
+-- Name: bookmark_scores; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE bookmark_scores (
+    id bigint NOT NULL,
+    bookmark_id bigint,
+    job_id bigint,
+    bscore numeric,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: bookmark_scores_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE bookmark_scores_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: bookmark_scores_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE bookmark_scores_id_seq OWNED BY bookmark_scores.id;
+
+
+--
+-- Name: category_scores; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE category_scores (
+    id bigint NOT NULL,
+    job_category_id bigint,
+    job_id bigint,
+    cscore numeric,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: category_scores_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE category_scores_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: category_scores_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE category_scores_id_seq OWNED BY category_scores.id;
+
+
+--
+-- Name: records; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE records (
+    id bigint NOT NULL,
+    user_id bigint,
+    job_id bigint,
+    jobrec_id bigint,
+    savedscore numeric,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: records_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE records_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: records_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE records_id_seq OWNED BY records.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE schema_migrations (
     version character varying NOT NULL
 );
+
+
+--
+-- Name: skill_scores; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE skill_scores (
+    id bigint NOT NULL,
+    user_skill_id bigint,
+    job_skill_id bigint,
+    job_id bigint,
+    sscore numeric,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: skill_scores_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE skill_scores_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: skill_scores_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE skill_scores_id_seq OWNED BY skill_scores.id;
 
 
 SET search_path = analytics, pg_catalog;
@@ -3351,6 +3518,41 @@ ALTER TABLE ONLY "UserSkills" ALTER COLUMN id SET DEFAULT nextval('"UserSkills_i
 --
 
 ALTER TABLE ONLY "Users" ALTER COLUMN id SET DEFAULT nextval('"Users_id_seq"'::regclass);
+
+
+--
+-- Name: application_scores id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY application_scores ALTER COLUMN id SET DEFAULT nextval('application_scores_id_seq'::regclass);
+
+
+--
+-- Name: bookmark_scores id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY bookmark_scores ALTER COLUMN id SET DEFAULT nextval('bookmark_scores_id_seq'::regclass);
+
+
+--
+-- Name: category_scores id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY category_scores ALTER COLUMN id SET DEFAULT nextval('category_scores_id_seq'::regclass);
+
+
+--
+-- Name: records id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY records ALTER COLUMN id SET DEFAULT nextval('records_id_seq'::regclass);
+
+
+--
+-- Name: skill_scores id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY skill_scores ALTER COLUMN id SET DEFAULT nextval('skill_scores_id_seq'::regclass);
 
 
 SET search_path = analytics, pg_catalog;
@@ -3950,6 +4152,14 @@ ALTER TABLE ONLY "Users"
 
 
 --
+-- Name: application_scores application_scores_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY application_scores
+    ADD CONSTRAINT application_scores_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3958,11 +4168,43 @@ ALTER TABLE ONLY ar_internal_metadata
 
 
 --
+-- Name: bookmark_scores bookmark_scores_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY bookmark_scores
+    ADD CONSTRAINT bookmark_scores_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: category_scores category_scores_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY category_scores
+    ADD CONSTRAINT category_scores_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: records records_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY records
+    ADD CONSTRAINT records_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: skill_scores skill_scores_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY skill_scores
+    ADD CONSTRAINT skill_scores_pkey PRIMARY KEY (id);
 
 
 SET search_path = analytics, pg_catalog;
@@ -5050,10 +5292,112 @@ ALTER TABLE ONLY "Users"
 
 
 --
+-- Name: skill_scores fk_rails_2054a951bc; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY skill_scores
+    ADD CONSTRAINT fk_rails_2054a951bc FOREIGN KEY (user_skill_id) REFERENCES "UserSkills"(id);
+
+
+--
+-- Name: bookmark_scores fk_rails_238e31fd04; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY bookmark_scores
+    ADD CONSTRAINT fk_rails_238e31fd04 FOREIGN KEY (bookmark_id) REFERENCES "Bookmarks"(id);
+
+
+--
+-- Name: application_scores fk_rails_5c084bac90; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY application_scores
+    ADD CONSTRAINT fk_rails_5c084bac90 FOREIGN KEY (application_id) REFERENCES "Applications"(id);
+
+
+--
+-- Name: skill_scores fk_rails_73301aa57e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY skill_scores
+    ADD CONSTRAINT fk_rails_73301aa57e FOREIGN KEY (job_skill_id) REFERENCES "JobSkills"(id);
+
+
+--
+-- Name: records fk_rails_8c240cab9d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY records
+    ADD CONSTRAINT fk_rails_8c240cab9d FOREIGN KEY (job_id) REFERENCES "Jobs"(id);
+
+
+--
+-- Name: skill_scores fk_rails_90bdae91c0; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY skill_scores
+    ADD CONSTRAINT fk_rails_90bdae91c0 FOREIGN KEY (job_id) REFERENCES "Jobs"(id);
+
+
+--
+-- Name: records fk_rails_9ba3ba9afc; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY records
+    ADD CONSTRAINT fk_rails_9ba3ba9afc FOREIGN KEY (user_id) REFERENCES "Users"(id);
+
+
+--
+-- Name: application_scores fk_rails_a3c1a8ea64; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY application_scores
+    ADD CONSTRAINT fk_rails_a3c1a8ea64 FOREIGN KEY (job_id) REFERENCES "Jobs"(id);
+
+
+--
+-- Name: category_scores fk_rails_aff1bfc5c0; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY category_scores
+    ADD CONSTRAINT fk_rails_aff1bfc5c0 FOREIGN KEY (job_category_id) REFERENCES "JobCategories"(id);
+
+
+--
+-- Name: bookmark_scores fk_rails_d538df1212; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY bookmark_scores
+    ADD CONSTRAINT fk_rails_d538df1212 FOREIGN KEY (job_id) REFERENCES "Jobs"(id);
+
+
+--
+-- Name: category_scores fk_rails_db31e11282; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY category_scores
+    ADD CONSTRAINT fk_rails_db31e11282 FOREIGN KEY (job_id) REFERENCES "Jobs"(id);
+
+
+--
+-- Name: records fk_rails_ef5adebb8e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY records
+    ADD CONSTRAINT fk_rails_ef5adebb8e FOREIGN KEY (jobrec_id) REFERENCES "Jobs"(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
 SET search_path TO "$user", public;
 
+INSERT INTO "schema_migrations" (version) VALUES
+('20171024033600'),
+('20171024044029'),
+('20171024044356'),
+('20171024094423'),
+('20171024125045');
 
 
