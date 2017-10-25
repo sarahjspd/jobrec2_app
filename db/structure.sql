@@ -2737,8 +2737,8 @@ ALTER SEQUENCE "Scores_id_seq" OWNED BY "Scores".id;
 CREATE TABLE "Skills" (
     id integer NOT NULL,
     name character varying(255),
-    "createdAt" timestamp with time zone NOT NULL,
-    "updatedAt" timestamp with time zone NOT NULL
+    "createdAt" timestamp without time zone NOT NULL,
+    "updatedAt" timestamp without time zone NOT NULL
 );
 
 
