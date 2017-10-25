@@ -1643,7 +1643,7 @@ CREATE TABLE "JobCategories" (
     "createdAt" timestamp with time zone NOT NULL,
     "updatedAt" timestamp with time zone NOT NULL,
     "customGroupJobCategories" jsonb DEFAULT '{}'::jsonb,
-    banner_pic character varying
+    image character varying
 );
 
 
@@ -2095,7 +2095,7 @@ CREATE TABLE "JobTitles" (
     "JobCategoryId" integer,
     "createdAt" timestamp with time zone NOT NULL,
     "updatedAt" timestamp with time zone NOT NULL,
-    banner_pic character varying
+    image character varying
 );
 
 
@@ -2153,7 +2153,8 @@ CREATE TABLE "Jobs" (
     "descriptionHTML" text,
     "descriptionMarkDown" text,
     "CityId" integer,
-    "CountryCode" character varying(255)
+    "CountryCode" character varying(255),
+    image character varying
 );
 
 
@@ -2908,7 +2909,8 @@ CREATE TABLE "Users" (
     nric character varying(255),
     "isPublic" boolean DEFAULT false NOT NULL,
     slug character varying(255),
-    "CityId" integer
+    "CityId" integer,
+    image character varying
 );
 
 
@@ -5402,6 +5404,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171024094423'),
 ('20171024125045'),
 ('20171024234446'),
-('20171024235221');
+('20171024235221'),
+('20171025033505'),
+('20171025033948');
 
 
