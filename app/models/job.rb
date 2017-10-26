@@ -7,7 +7,11 @@ class Job < ApplicationRecord
   has_many :jobs, :class_name => 'Job', :foreign_key => 'job_id'
   has_many :jobrec, :class_name => 'Job', :foreign_key => 'jobrec_id'
 
+
   has_many :JobSkills, :foreign_key => 'JobId'
+  has_many :Skills, through: :JobSkills, source: :Skill
+
+
   has_many :Bookmarks, :foreign_key => 'JobId'
   has_many :Applications, :foreign_key => 'JobId'
 
