@@ -2,12 +2,23 @@
 <b>Status:</b><div><%= @job.status %></div></br>
 <b>Description:</b><div><%= @job.descriptionV2 %></div></br>
 <b>Intro</b>:<div><%= @job.intro %></div></br>
-
 <b>Company:</b><div><%= @job.Company.name %></div></br>
-
-
 <div><b>JobCategory:</b> <%= @job.JobCategory.name %></div></br>
-
-
-
 <div><b>JobCategory:</b> <%= @job.Skills %></div></br>
+
+<br>
+<div>Total No. of Users: <%= @users.count if @users.present? %></div>
+<div>Recommended Jobs: <%= @ajobslist.count if @ajobslist.present? %></div>
+<div>Total Applications: <%= @ajobsapplicationcount.count if @ajobsapplicationcount.present? %></div>
+<br>
+<div>11111111111111</div>
+
+	<div>Application Score Table Count<%= @applicationscoretable.count %></div>
+	<% @applicationscoretable.each do |applicationtable| %>
+	<div><%= applicationtable %></div>
+	<% end %>
+	99999<div><%= @i %></div>9999
+	99999<div><%= @j %></div>9999
+
+<div>11111111111111</div>
+

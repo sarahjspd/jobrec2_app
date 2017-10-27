@@ -1,0 +1,8 @@
+<h2>Index Page</h2>
+
+<h4> List of Jobs</h4>
+	
+<% @joblist.each do |joblist| %>
+<div><%= link_to joblist.title, job_path(id: joblist.id) %>, <%= joblist.id %>, <b><%= joblist.Applications.count %></b></div>
+<% end %>
+

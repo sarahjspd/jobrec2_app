@@ -13,7 +13,11 @@ class Job < ApplicationRecord
 
 
   has_many :Bookmarks, :foreign_key => 'JobId'
+  has_many :busers, through: :Bookmarks, source: :User
+
+
   has_many :Applications, :foreign_key => 'JobId'
+  has_many :ausers, through: :Applications, source: :User
 
   belongs_to :Company, :foreign_key => 'CompanyId'
   belongs_to :JobCategory, :foreign_key => 'JobCategoryId'
