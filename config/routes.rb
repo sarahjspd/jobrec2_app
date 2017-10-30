@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   	resources :users, only: [:index]
     resources :jobs
 
- 	root to: "users#index"
+ 	root to: "jobs#index"
 
 
 end

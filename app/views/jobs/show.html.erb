@@ -2,12 +2,31 @@
 <b>Status:</b><div><%= @job.status %></div></br>
 <b>Description:</b><div><%= @job.descriptionV2 %></div></br>
 <b>Intro</b>:<div><%= @job.intro %></div></br>
-
 <b>Company:</b><div><%= @job.Company.name %></div></br>
-
-
 <div><b>JobCategory:</b> <%= @job.JobCategory.name %></div></br>
-
-
-
 <div><b>JobCategory:</b> <%= @job.Skills %></div></br>
+
+<br>
+
+<div> Application Recommendation </div>
+<div>Total No. of Users: <%= @users.count if @users.present? %></div>
+<div>Original Recommended Jobs: <%= @jobsnum.count if @jobsnum.count.present? %></div>
+<br>
+
+	<% @recapplicationjobs.each do |applicationtable| %>
+	<div><%= applicationtable.title %>,<%= applicationtable.status %>, <%= applicationtable.Company.name %></div>
+	<% end %>
+<br>
+
+<div> Bookmark Recommendation </div>
+<div>Total No. of Users: <%= @busers.count if @busers.present? %></div>
+<div>Original Recommended Jobs: <%= @bjobsnum.count if @bjobsnum.count.present? %></div>
+<br>
+
+	<% @recbookmarkjobs.each do |bookmarktable| %>
+	<div><%= bookmarktable.title %>,<%= bookmarktable.status %>, <%= bookmarktable.Company.name %></div>
+	<% end %>
+
+
+
+

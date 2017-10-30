@@ -2939,7 +2939,7 @@ ALTER SEQUENCE "Users_id_seq" OWNED BY "Users".id;
 
 CREATE TABLE application_scores (
     id bigint NOT NULL,
-    application_id bigint,
+    originaljob_id bigint,
     job_id bigint,
     ascore numeric,
     created_at timestamp without time zone NOT NULL,
@@ -2984,7 +2984,7 @@ CREATE TABLE ar_internal_metadata (
 
 CREATE TABLE bookmark_scores (
     id bigint NOT NULL,
-    bookmark_id bigint,
+    originaljob_id bigint,
     job_id bigint,
     bscore numeric,
     created_at timestamp without time zone NOT NULL,
@@ -5304,22 +5304,6 @@ ALTER TABLE ONLY skill_scores
 
 
 --
--- Name: bookmark_scores fk_rails_238e31fd04; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY bookmark_scores
-    ADD CONSTRAINT fk_rails_238e31fd04 FOREIGN KEY (bookmark_id) REFERENCES "Bookmarks"(id);
-
-
---
--- Name: application_scores fk_rails_5c084bac90; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY application_scores
-    ADD CONSTRAINT fk_rails_5c084bac90 FOREIGN KEY (application_id) REFERENCES "Applications"(id);
-
-
---
 -- Name: skill_scores fk_rails_73301aa57e; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5352,11 +5336,27 @@ ALTER TABLE ONLY records
 
 
 --
+-- Name: application_scores fk_rails_9f6c5cdab6; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY application_scores
+    ADD CONSTRAINT fk_rails_9f6c5cdab6 FOREIGN KEY (originaljob_id) REFERENCES "Jobs"(id);
+
+
+--
 -- Name: application_scores fk_rails_a3c1a8ea64; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY application_scores
     ADD CONSTRAINT fk_rails_a3c1a8ea64 FOREIGN KEY (job_id) REFERENCES "Jobs"(id);
+
+
+--
+-- Name: bookmark_scores fk_rails_af3a6dcf30; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY bookmark_scores
+    ADD CONSTRAINT fk_rails_af3a6dcf30 FOREIGN KEY (originaljob_id) REFERENCES "Jobs"(id);
 
 
 --

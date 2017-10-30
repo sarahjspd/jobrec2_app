@@ -1,6 +1,6 @@
 class ApplicationScore < ApplicationRecord
 
-	belongs_to :application
+	belongs_to :originaljob, :class_name => 'Job'
 	belongs_to :job
 
 
