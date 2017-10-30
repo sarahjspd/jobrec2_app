@@ -6,6 +6,8 @@ class Job < ApplicationRecord
 
   has_many :jobs, :class_name => 'Job', :foreign_key => 'job_id'
   has_many :jobrec, :class_name => 'Job', :foreign_key => 'jobrec_id'
+  has_many :originaljobs, :class_name => 'application_score', :foreign_key => 'originaljob_id'
+  has_many :originaljobs, :class_name => 'bookmark_score', :foreign_key => 'originaljob_id'
 
 
   has_many :JobSkills, :foreign_key => 'JobId'

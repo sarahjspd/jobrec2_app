@@ -7,18 +7,26 @@
 <div><b>JobCategory:</b> <%= @job.Skills %></div></br>
 
 <br>
+
+<div> Application Recommendation </div>
 <div>Total No. of Users: <%= @users.count if @users.present? %></div>
-<div>Recommended Jobs: <%= @ajobslist.count if @ajobslist.present? %></div>
-<div>Total Applications: <%= @ajobsapplicationcount.count if @ajobsapplicationcount.present? %></div>
+<div>Original Recommended Jobs: <%= @jobsnum.count if @jobsnum.count.present? %></div>
 <br>
-<div>11111111111111</div>
 
-	<div>Application Score Table Count<%= @applicationscoretable.count %></div>
-	<% @applicationscoretable.each do |applicationtable| %>
-	<div><%= applicationtable %></div>
+	<% @recapplicationjobs.each do |applicationtable| %>
+	<div><%= applicationtable.title %>,<%= applicationtable.status %>, <%= applicationtable.Company.name %></div>
 	<% end %>
-	99999<div><%= @i %></div>9999
-	99999<div><%= @j %></div>9999
+<br>
 
-<div>11111111111111</div>
+<div> Bookmark Recommendation </div>
+<div>Total No. of Users: <%= @busers.count if @busers.present? %></div>
+<div>Original Recommended Jobs: <%= @bjobsnum.count if @bjobsnum.count.present? %></div>
+<br>
+
+	<% @recbookmarkjobs.each do |bookmarktable| %>
+	<div><%= bookmarktable.title %>,<%= bookmarktable.status %>, <%= bookmarktable.Company.name %></div>
+	<% end %>
+
+
+
 
