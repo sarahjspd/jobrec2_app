@@ -3045,6 +3045,46 @@ ALTER SEQUENCE category_scores_id_seq OWNED BY category_scores.id;
 
 
 --
+-- Name: members; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE members (
+    id bigint NOT NULL,
+    email character varying DEFAULT ''::character varying NOT NULL,
+    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying,
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    sign_in_count integer DEFAULT 0 NOT NULL,
+    current_sign_in_at timestamp without time zone,
+    last_sign_in_at timestamp without time zone,
+    current_sign_in_ip inet,
+    last_sign_in_ip inet,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: members_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE members_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: members_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE members_id_seq OWNED BY members.id;
+
+
+--
 -- Name: records; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3543,6 +3583,13 @@ ALTER TABLE ONLY bookmark_scores ALTER COLUMN id SET DEFAULT nextval('bookmark_s
 --
 
 ALTER TABLE ONLY category_scores ALTER COLUMN id SET DEFAULT nextval('category_scores_id_seq'::regclass);
+
+
+--
+-- Name: members id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY members ALTER COLUMN id SET DEFAULT nextval('members_id_seq'::regclass);
 
 
 --
@@ -4188,6 +4235,14 @@ ALTER TABLE ONLY category_scores
 
 
 --
+-- Name: members members_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY members
+    ADD CONSTRAINT members_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: records records_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4374,6 +4429,20 @@ CREATE UNIQUE INDEX "Users_nric_key" ON "Users" USING btree (nric);
 --
 
 CREATE UNIQUE INDEX "Users_slug_key" ON "Users" USING btree (slug);
+
+
+--
+-- Name: index_members_on_email; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_members_on_email ON members USING btree (email);
+
+
+--
+-- Name: index_members_on_reset_password_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_members_on_reset_password_token ON members USING btree (reset_password_token);
 
 
 SET search_path = analytics, pg_catalog;
@@ -5406,6 +5475,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171024234446'),
 ('20171024235221'),
 ('20171025033505'),
-('20171025033948');
+('20171025033948'),
+('20171031095701');
 
 
