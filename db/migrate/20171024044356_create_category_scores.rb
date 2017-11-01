@@ -1,7 +1,7 @@
 class CreateCategoryScores < ActiveRecord::Migration[5.1]
   def change
     create_table :category_scores do |t|
-    	
+
     	t.bigint :job_category_id
     	t.bigint :job_id
     	t.decimal :cscore
