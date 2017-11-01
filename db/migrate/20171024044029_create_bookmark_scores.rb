@@ -1,7 +1,7 @@
 class CreateBookmarkScores < ActiveRecord::Migration[5.1]
   def change
     create_table :bookmark_scores do |t|
-    
+
     	t.bigint :originaljob_id
     	t.bigint :job_id
     	t.decimal :bscore
@@ -13,6 +13,6 @@ class CreateBookmarkScores < ActiveRecord::Migration[5.1]
 
 
 
-    
+
   end
 end

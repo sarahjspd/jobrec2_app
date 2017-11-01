@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   	resources :users, only: [:index]
     resources :jobs
+    resources :skill_scores
+    resources :category_scores
 
  	root to: "admins#index"
 

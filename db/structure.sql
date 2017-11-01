@@ -2737,8 +2737,8 @@ ALTER SEQUENCE "Scores_id_seq" OWNED BY "Scores".id;
 CREATE TABLE "Skills" (
     id integer NOT NULL,
     name character varying(255),
-    "createdAt" timestamp without time zone NOT NULL,
-    "updatedAt" timestamp without time zone NOT NULL
+    "createdAt" timestamp with time zone NOT NULL,
+    "updatedAt" timestamp with time zone NOT NULL
 );
 
 
@@ -3017,7 +3017,7 @@ ALTER SEQUENCE bookmark_scores_id_seq OWNED BY bookmark_scores.id;
 
 CREATE TABLE category_scores (
     id bigint NOT NULL,
-    job_category_id bigint,
+    originaljob_id bigint,
     job_id bigint,
     cscore numeric,
     created_at timestamp without time zone NOT NULL,
@@ -3133,8 +3133,8 @@ CREATE TABLE schema_migrations (
 
 CREATE TABLE skill_scores (
     id bigint NOT NULL,
-    user_skill_id bigint,
-    job_skill_id bigint,
+    user_id bigint,
+    originaljob_id bigint,
     job_id bigint,
     sscore numeric,
     created_at timestamp without time zone NOT NULL,
@@ -5365,19 +5365,11 @@ ALTER TABLE ONLY "Users"
 
 
 --
--- Name: skill_scores fk_rails_2054a951bc; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: skill_scores fk_rails_36de031993; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY skill_scores
-    ADD CONSTRAINT fk_rails_2054a951bc FOREIGN KEY (user_skill_id) REFERENCES "UserSkills"(id);
-
-
---
--- Name: skill_scores fk_rails_73301aa57e; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY skill_scores
-    ADD CONSTRAINT fk_rails_73301aa57e FOREIGN KEY (job_skill_id) REFERENCES "JobSkills"(id);
+    ADD CONSTRAINT fk_rails_36de031993 FOREIGN KEY (originaljob_id) REFERENCES "Jobs"(id);
 
 
 --
@@ -5421,6 +5413,14 @@ ALTER TABLE ONLY application_scores
 
 
 --
+-- Name: skill_scores fk_rails_ab92b065a8; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY skill_scores
+    ADD CONSTRAINT fk_rails_ab92b065a8 FOREIGN KEY (user_id) REFERENCES "Users"(id);
+
+
+--
 -- Name: bookmark_scores fk_rails_af3a6dcf30; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5433,7 +5433,7 @@ ALTER TABLE ONLY bookmark_scores
 --
 
 ALTER TABLE ONLY category_scores
-    ADD CONSTRAINT fk_rails_aff1bfc5c0 FOREIGN KEY (job_category_id) REFERENCES "JobCategories"(id);
+    ADD CONSTRAINT fk_rails_aff1bfc5c0 FOREIGN KEY (originaljob_id) REFERENCES "JobCategories"(id);
 
 
 --
@@ -5476,6 +5476,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171024235221'),
 ('20171025033505'),
 ('20171025033948'),
-('20171031095701');
+('20171031095701'),
+('20171101032116');
 
 
