@@ -1,8 +1,50 @@
-<h2>Index Page</h2>
+<div class="container" style="text-align: center; color: #fff; background-size: cover; background-image: url(https://az616578.vo.msecnd.net/files/2016/11/06/636140659029117301-893379077_city.jpeg);padding-bottom: 40px;
+padding-top: 20px;background-position: center;">
+<div>
+	<h1>Jobs and Internship</h1>
+</div>
+<div class="search-bar" style="background-color: white; color: gray;    width: 90%; alignment
+    height: 5em;
+    border: white; ">
+	 <div class="field"><span class="glyphicon glyphicon-search" style="font-size: larger;"></span>
+	  <%= text_field_tag "dummy", nil%></div><br>
+	 <div class="search-options" >Job Category ▼ Skills ▼ Location ▼ Job Type ▼ Company ▼
+	 <button type="button" style="background: #e0e1e2 none; color: rgba(0,0,0,.6); border: none; border-color: grey;vertical-align: baseline;" class="btn btn-primary btn-reset" >Reset
+	 </div>
 
-<h4> List of Jobs</h4>
-	
-<% @joblist.each do |joblist| %>
-<div><b><%= joblist.Applications.count %></b><%= link_to joblist.title, job_path(id: joblist.id) %>, <%= joblist.id %></div>
-<% end %>
+</div>
+</div>
 
+</br>
+</br>
+</br>
+<div class="container-fluid">
+<div class="row">
+
+<div class=row-jobs >
+
+			<% @joblist.each do |joblist| %>
+					<div class="col-md-4">
+						<div class="card" style="height: 350px; background-color:#fff; padding">
+							<div class="card-head">
+							</div>
+							<div class="card-content">
+								<div class="job-title">
+									<%= link_to job_path(id: joblist.id) do %>
+									<h3><%= joblist.title =%></h3>
+									<% end %>
+									<h4><%= joblist.Company.name =%></h4>
+								</div>
+								<div class="job-desc">
+									<%= link_to job_path(id: joblist.id) do %>
+									<p><%= joblist.intro =%></p>
+									<% end%>
+								</div>
+							</div>
+						</div>
+					</div>
+			<% end %>
+		</br>
+</div>
+</div>
+</div>

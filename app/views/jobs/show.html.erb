@@ -1,32 +1,120 @@
-<h1><%= @job.title %></h1>
-<b>Status:</b><div><%= @job.status %></div></br>
-<b>Description:</b><div><%= @job.descriptionV2 %></div></br>
-<b>Intro</b>:<div><%= @job.intro %></div></br>
-<b>Company:</b><div><%= @job.Company.name %></div></br>
-<div><b>JobCategory:</b> <%= @job.JobCategory.name %></div></br>
-<div><b>JobCategory:</b> <%= @job.Skills %></div></br>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="../../favicon.ico">
 
-<br>
+<title>Blog Template for Bootstrap</title>
 
-<div> Application Recommendation </div>
-<div>Total No. of Users: <%= @users.count if @users.present? %></div>
-<div>Original Recommended Jobs: <%= @jobsnum.count if @jobsnum.count.present? %></div>
-<br>
+<!-- Bootstrap core CSS -->
+<link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
 
-	<% @recapplicationjobs.each do |applicationtable| %>
-	<div><%= applicationtable.title %>,<%= applicationtable.status %>, <%= applicationtable.Company.name %></div>
-	<% end %>
-<br>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
-<div> Bookmark Recommendation </div>
-<div>Total No. of Users: <%= @busers.count if @busers.present? %></div>
-<div>Original Recommended Jobs: <%= @bjobsnum.count if @bjobsnum.count.present? %></div>
-<br>
+<!-- Custom styles for this template -->
+<link href="blog.css" rel="stylesheet">
 
-	<% @recbookmarkjobs.each do |bookmarktable| %>
-	<div><%= bookmarktable.title %>,<%= bookmarktable.status %>, <%= bookmarktable.Company.name %></div>
-	<% end %>
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+  </head>
+<body>
+<div class="site-wrapper">
+  <div class="container" style="text-align: center; color: #fff; background-size: cover; background-image: url(http://www.f-covers.com/cover/sky-sunset-at-sea-facebook-cover-timeline-banner-for-fb.jpg);">
+
+    <div class="blog-header"  >
+      <h1 class="blog-title"><%= @job.title %></h1>
+
+      <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
+    </div>
+    <div>
+    <button type="button" style="background-color: #f2711c; color: #fff; border-color: #f2711c;" class="btn btn-primary btn-1">➦ Share
+    <button type="button" class="btn btn-primary btn-2">Bookmark
+    <button type="button" style="background-color: #4caf50; color: #fff; border-color: #4caf50;"class="btn btn-primary btn-3">✓ Apply
+    </div>
+  </br>
+  </br>
+      <div class="blog-header"><b>Status:</b><%= @job.status %></div></br>
+    </div>
+</div>
+
+<div class="row1">
+<table id="view-bookmarks">
+  <thead>
+  <tr>
+    <th colspan="3">
+    Bookmarks:
+    <%= @job.status %>
+  </th>
+  <th colspan="3">
+    Views:<%= @job.status %>
+  </th>
+  </tr>
+    </thead>
+</table>
+
+<div class="head50">
+    Bookmarks:
+    <%= @job.status %>
+</div>
+<div class="head50">
+    Views:<%= @job.status %>
+</div>
+<style>
+.head50{
+  display: inline;
+  width: 50%;
+}
+</style>
+
+</div>
+</br>
+</br>
+    <div class="row">
+
+      <div class="col-sm-8 blog-main" style=" background-color: white; ">
+
+        <div class="blog-post">
+          <h2 class="blog-post-title">Description</h2>
+
+          <p><%= @job.descriptionV2 %></p></br>
+
+        </div>
+
+      </div>
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar" >
+          <div class="sidebar-module sidebar-module-inset"style=" background-color: white; ">
+            <h2>Company</h2>
+            <p><%= @job.Company.name %></p>
+          </div>
+
+
+          <div class="sidebar-module sidebar-job-category" style= " background-color: white;" >
+            <h2>Category</h2>
+            <p><%= @job.JobCategory.name %></p>
+          </div>
 
 
 
 
+        <div class="sidebar-module" style=" background-color: white; ">
+            <h2>Skills required:</h2>
+            <ul>
+              <% if @skill!=nil %>
+              <% @skill.each do |s| %>
+              <li><%=  s %></a></li>
+              <% end %>
+              <% else %>
+              <p>The company did not indicate any required skills.</p>
+              <% end %>
+            </ul>
+            </div>
+          </div>
+          </div>

@@ -2131,7 +2131,7 @@ CREATE TABLE "Jobs" (
     "bannerPic" character varying(255),
     intro character varying(255),
     location character varying(255),
-    jobtype "enum_Jobs_type" NOT NULL,
+    type "enum_Jobs_type" NOT NULL,
     "durationLegacy" character varying(255),
     "salaryLegacy" character varying(255),
     attachments jsonb DEFAULT '[]'::jsonb NOT NULL,
@@ -5429,11 +5429,11 @@ ALTER TABLE ONLY bookmark_scores
 
 
 --
--- Name: category_scores fk_rails_aff1bfc5c0; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: category_scores fk_rails_d3eec071e6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY category_scores
-    ADD CONSTRAINT fk_rails_aff1bfc5c0 FOREIGN KEY (originaljob_id) REFERENCES "JobCategories"(id);
+    ADD CONSTRAINT fk_rails_d3eec071e6 FOREIGN KEY (originaljob_id) REFERENCES "JobCategories"(id);
 
 
 --
@@ -5476,7 +5476,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171024235221'),
 ('20171025033505'),
 ('20171025033948'),
-('20171031095701'),
-('20171101032116');
+('20171031095701');
 
 
