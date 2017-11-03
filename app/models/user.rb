@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 	has_many :ajobs, through: :Applications, source: :Job
 
 	has_many :Countries, :foreign_key => 'CountryCode'
-
+	# has_many :skill_scores
 	belongs_to :City, :foreign_key => 'CityId'
 
 
