@@ -1,10 +1,22 @@
 class JobsController < ApplicationController
-  
- 	def index
 
- 	end
   
- 	def show  
+ 	
+
+
+ 	def index
+ 	
+    @joblist = Job.all.where(createdAt: 30.days.ago..Time.now, status: "OPEN").order(createdAt: :desc)
+ 	end
+
+
+ 	def show
+
+
+   	@job = Job.find(params[:id])
+      @skill = @job.Skills.pluck(:name)
+
+  
  
  #------For Job Recommendation-------------
    	@jobshow = params[:id]
@@ -24,6 +36,7 @@ class JobsController < ApplicationController
 
 	@sorted_rec = @count_rec.sort_by{ |job_id, score| score }.reverse
 
+
 	@final_rec_id = @sorted_rec.sort_by{ |job_id, score| score }.reverse.collect(&:first).first(5)
 
 	@final_rec_jobs = Job.where(id: @final_rec_id)
@@ -31,6 +44,6 @@ class JobsController < ApplicationController
 	end
 
 
- 
+
 
 end
