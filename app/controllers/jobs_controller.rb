@@ -41,6 +41,19 @@ class JobsController < ApplicationController
 
 	@final_rec_jobs = Job.where(id: @final_rec_id)
 #--------------------------------------------
+#---------For User Record Creation ----------
+	if member_signed_in?
+
+		@sorted_rec.first(5).each do |records|
+
+			rec_id = records[0]
+			score = records[1]
+			Record.create(user_id: User.find_by(email: current_member.email).id, job_id: @jobshow, jobrec_id: rec_id, savedscore: score)
+		end
+	end	
+
+
+
 	end
 
 
