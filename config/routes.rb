@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :skill_scores
     resources :category_scores
 
- 	root to: "admins#index"
+ 	root to: "jobs#index"
 
  	resources :admins
  	resources :jobapplication, only: [:create, :index]

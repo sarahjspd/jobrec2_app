@@ -19,7 +19,7 @@
   background:linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(<%= randomized_background_image1 %>) no-repeat center center ;
   padding: 0; background-position: bottom; background-size: cover; ">
 
-    <div class="blog-header"  >
+    <div class="blog-header">
       <h1 class="blog-title"><%= @job.title %></h1>
 
 
@@ -116,10 +116,10 @@
 
 
 
-          <% @final_rec_jobs.each do |jobrec| %>
+          <% @final_rec_id.each do |jobid| %>
           <div class="recommended-job" style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(<%= randomized_background_image %>) no-repeat center center ; ">
-            <%= link_to job_path(id: jobrec.id) do %>
-            <b><%= jobrec.title %></b></br><%= jobrec.Company.name %></div></br>
+            <%= link_to job_path(id: jobid) do %>
+            <b><%= Job.find(jobid).title %></b></br><%= Job.find(jobid).Company.name %></div></br>
             <% end %>
           <% end %>
           </div>
