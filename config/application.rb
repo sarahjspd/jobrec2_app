@@ -13,6 +13,7 @@ module Jobrec2App
     config.active_record.schema_format = :sql
     config.assets.precomplile
     config.assets.precompile += %w( login.css )
+    config.active_job.queue_adapter = :delayed_job
     #Rails.application.config.assets.precompile += %w( login.css )
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

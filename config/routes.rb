@@ -10,6 +10,8 @@ Rails.application.routes.draw do
  	root to: "admins#index"
 
  	resources :admins
+ 	resources :jobapplication, only: [:create, :index]
+ 	resources :recrefreshes, only: [:create]
 
 
 
