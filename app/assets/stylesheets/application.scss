@@ -69,23 +69,32 @@
   background: white
 }
 
+
 body {
-  .row1{
-    color: grey;
-    background-color: white;
-  text-align: center;
-  padding: 10px;
-  }
+
   .col-md-6 {
     width: 50%;
     background-color: #fafafa;
 }
-th {
-  padding-bottom: 5px;
-  margin-left:15%;
-  margin-right:15%;
-  text-align:center;
+.col-md-offset-1 {
+    margin-left: 0;
 }
+.col-sm-3 {
+    width: 33.33%;
+}
+.job-recommendation {
+      padding-left: 10px;
+}
+.side-bar-company{
+      padding-left: 10px;
+}
+.sidebar-module-sidebar-job-category{
+  padding-left: 10px;
+}
+.sidebar-module{
+  padding-left: 10px;
+}
+
 .row {
   margin-left: 30px;
     margin-right: 15px;
@@ -97,6 +106,33 @@ th {
 
     text-align: left;
     background-color: #cccccc;
+
+}
+
+.row1{
+  color: grey;
+  background-color: white;
+  text-align: center;
+  padding: 0;
+  height: 100px;
+}
+
+.field{
+
+
+  input {
+  width: 15%;
+  margin: auto;
+  height: 25px;
+  color: black;}
+
+}
+
+.actions {
+  input {
+  width: 5%;
+  margin: auto;
+  height: 25px}
 
 }
 ul.abc a{color: white;
@@ -117,14 +153,23 @@ padding: 20px
 
 }
 
-
+.job-and-internship-title {
+  font-size: 30px;
+  padding-left: 30px;
+}
 
 
 input {
-   width: 90%;
-   height: 30px;
+   width: 94%;
+   height: 40px;
+   border: none;
  }
-
+ input:focus,
+ select:focus,
+ textarea:focus,
+ {
+     outline: none;
+ }
 .search-options {
   text-align: left;
   font-size: medium;
@@ -138,3 +183,62 @@ input {
     border: none;
 margin: auto;
   }
+.recommended-job{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 100px;
+  padding-left: 10px;
+  color: white;
+  a:link {color: white;}
+  a:hover {text-decoration: none;}
+  padding-top: 11px;
+  font-size: large;
+
+
+  }
+.job-rec-header{
+  font-size: x-large;
+  background: white;
+  padding-left: 10px;
+
+}
+.job-rec-sub-header{
+  background: white;
+  padding-left: 10px;
+
+}
+.job-recommendation {
+
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 300px;
+    overflow: auto;
+}
+
+
+.job-title{
+  /*background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));*/
+
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 150px;
+  padding-left: 10px;
+  a:link {color: white;}
+  a:hover {text-decoration: none;}
+  position: relative;
+  }
+.job-title-content{
+
+}
+.job-company{
+  padding-left: 10px;
+  a:link {color: black;}
+  a:hover {text-decoration: none;}
+}
+
+.job-desc{
+  padding-left: 10px;
+  a:link {color: black;}
+  a:hover {text-decoration: none;}
+}

@@ -9,7 +9,7 @@ class AdminsController < ApplicationController
 	def create
 
 		# A Variable ----------------------------------------------------------------
-   	
+
 #GenerateApplicationScoreService.new.call
 			# if @asave.save
 			# 	flash[:notice] = "Applications Score Saved Successfully"
@@ -17,9 +17,9 @@ class AdminsController < ApplicationController
 			# 	@asave.errors.full_messages
 			# end
 	 			# @recapplicationjobs = Job.where(id: ApplicationScore.where(originaljob_id: params[:id]).pluck(:job_id))
-		
+
 		# B Variable ----------------------------------------------------------------
-	   
+
 #GenerateBookmarkScoreService.new.call
 	   # 	@bjob = Job.all.where(status: "OPEN").limit(100)
 
@@ -36,22 +36,22 @@ class AdminsController < ApplicationController
 		  #     @bjobsnum[i] << @bjobslist.map { |job| job if job[:id] != params[:id].to_i }.compact.pluck(:id)
 				# end
 		  #  	@bjobsnum = @bjobsnum.flatten
-	 		# 	@bjobsnumcount = @bjobsnum.each_with_object(Hash.new(0)) { |job_id,score| score[job_id] = 1*3 } 
-	 		# 	@bsort = @bjobsnumcount.sort_by {|k,v| v}.reverse 
+	 		# 	@bjobsnumcount = @bjobsnum.each_with_object(Hash.new(0)) { |job_id,score| score[job_id] = 1*3 }
+	 		# 	@bsort = @bjobsnumcount.sort_by {|k,v| v}.reverse
 
 	 		# 	@blimitsort = @bsort.first(10)
 	 		# 	@blimitsort.each do |jobscore|
-	 
+
 	 		# 		jobid = jobscore[0]
 	 		# 		score = jobscore[1]
 	 		# 		originaljob = eachjob.id
-	 
-	 
+
+
 	 		# 		@bsave = BookmarkScore.create(originaljob_id: eachjob.id, job_id: jobid, bscore: score)
 
 	 		# 	end
 	 		# end
-		
+
  		# C Variable ----------------------------------------------------------------
 #GenerateCategoryScoreService.new.call
  		# 	job = Job.where(id: ApplicationScore.all.pluck(:originaljob_id).uniq)

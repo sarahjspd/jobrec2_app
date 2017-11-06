@@ -1,15 +1,16 @@
 
-<div class="container" style="text-align: center; color: #fff; background-size: cover; background-image: url(https://az616578.vo.msecnd.net/files/2016/11/06/636140659029117301-893379077_city.jpeg);padding-bottom: 40px;
+<div class="container" style=" color: #fff; background-size: cover; background-image: url(https://az616578.vo.msecnd.net/files/2016/11/06/636140659029117301-893379077_city.jpeg);padding-bottom: 40px;
 padding-top: 20px;background-position: center;">
-<div>
-	<h1>Jobs and Internship</h1>
+<div class="job-and-internship-title">
+	<h1 style= "    font-size: 60px;">Jobs & Internships</h1>
 </div>
 <div class="search-bar" style="background-color: white; color: gray;     a
     border: white; ">
-	 <div class="field"><span class="glyphicon glyphicon-search" style="font-size: larger;"></span>
-	  <%= text_field_tag "dummy", nil%></div><br>
+	 <div class="field" style="padding-left: 10px;     height: 40px;
+    padding-top: 10px;"><span class="glyphicon glyphicon-search" style="font-size: larger;"></span>
+	  <%= text_field_tag "dummy", nil%></div>
 	 <div class="search-options" >Job Category ▼ Skills ▼ Location ▼ Job Type ▼ Company ▼
-	 <button type="button" style="background: #e0e1e2 none; color: rgba(0,0,0,.6); border: none; border-color: grey;vertical-align: baseline;" class="btn btn-primary btn-reset" >Reset
+	 <button type="button" style="background: #e0e1e2 none; color: rgba(0,0,0,.6); border: none; border-color: grey;vertical-align: baseline; margin-left: 538px;" class="btn btn-primary btn-reset" >Reset
 	 </div>
 
 </div>
@@ -25,15 +26,31 @@ padding-top: 20px;background-position: center;">
 
 			<% @joblist.each do |joblist| %>
 					<div class="col-md-4">
-						<div class="card" style="height: 350px; background-color:#fff; padding">
+						<div class="card" style="height: 250px; background-color:#fff; padding">
 							<div class="card-head">
 							</div>
 							<div class="card-content">
-								<div class="job-title">
+								<div class="job-title" style=" background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(<%= randomized_background_image %>) no-repeat center center ;background-color: rgba(0, 0, 0, 0.5);  ">
+
+
+
 									<%= link_to job_path(id: joblist.id) do %>
-									<h3><%= joblist.title =%></h3>
+
+									<% if joblist.jobtype == "FULL_TIME" %>
+									<button type="button" class="btn btn-primary btn-1" style="    border: none;">Full-Time</button>
+									<% elsif joblist.jobtype == "INTERNSHIP" %>
+									<button type="button" class="btn btn-primary">Internship</button>
+									<% else %>
+									<button type="button" class="btn btn-primary" style="background-color: #f2711c;    border: none;">Part-Time</button>
 									<% end %>
+									<h3 style="position: absolute;
+								bottom: 0;"><%= joblist.title =%></h3>
+									<% end %>
+								</div>
+								<div class="job-company">
+									<%= link_to job_path(id: joblist.id) do %>
 									<h4><%= joblist.Company.name =%></h4>
+									<% end %>
 								</div>
 								<div class="job-desc">
 									<%= link_to job_path(id: joblist.id) do %>
@@ -42,11 +59,11 @@ padding-top: 20px;background-position: center;">
 								</div>
 							</div>
 						</div>
+					</br>
 					</div>
 			<% end %>
-		</br>
-</div>
+
 </div>
 </div>
 
-
+</div>
