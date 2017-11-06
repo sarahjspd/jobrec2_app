@@ -15,66 +15,62 @@
   </head>
 <body>
 <div class="site-wrapper">
-  <div class="container" style="text-align: center; color: #fff; background-size: cover; background-image: url(http://www.f-covers.com/cover/sky-sunset-at-sea-facebook-cover-timeline-banner-for-fb.jpg);">
+  <div class="container" style="text-align: center; color: #fff;
+  background:linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(<%= randomized_background_image1 %>) no-repeat center center ;
+  padding: 0; background-position: bottom; background-size: cover; ">
 
     <div class="blog-header"  >
       <h1 class="blog-title"><%= @job.title %></h1>
 
 
-<div> Job Recommendations: </div>
-<br>
-<% @final_rec_jobs.each do |jobrec| %>
-<div><%= jobrec.title %></div>
-<% end %>
 
 
-      <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
+
+
     </div>
+  </br>
+  </br>
+  </br>
     <div>
-    <button type="button" style="background-color: #f2711c; color: #fff; border-color: #f2711c;" class="btn btn-primary btn-1">➦ Share
-    <button type="button" class="btn btn-primary btn-2">Bookmark
+    <button type="button" style="background-color: #f2711c; color: #fff; border-color: #f2711c;" class="btn btn-primary btn-1">➦ Share</button>
+    <button type="button" class="btn btn-primary btn-2">Bookmark</button>
 <!-- added link to apply -->
     <%= link_to jobs_path, method: :post do %>
       <button type="button" style="background-color: #4caf50; color: #fff; border-color: #4caf50;"class="btn btn-primary btn-3">✓ Apply</button>
     <% end %>
 <!-- added link to apply -->
+
     </div>
   </br>
   </br>
-      <div class="blog-header"><b>Status:</b><%= @job.status %></div></br>
+
+
+    <div class="row1">
+    <div class="head50">
+      <div class="bookmark-figure" style="font-size: large;" >
+        <%= @job.id %></div></br>bookmarks
+    </div>
+    <div class="head50">
+      <div class="views-figure" style="font-size: large;" ><%= @job.CompanyId %></div></br>views
+    </div>
+    <style>
+    .head50{
+      display: inline;
+      width: 50%;
+      float: left;
+      padding-top: 30px;
+      padding-bottom: 10px;
+      color: black;
+      background: #f2f2f2;
+    }
+    </style>
+
+    </div>
+
     </div>
 </div>
 
-<div class="row1">
-<table id="view-bookmarks">
-  <thead>
-  <tr>
-    <th colspan="3">
-    Bookmarks:
-    <%= @job.status %>
-  </th>
-  <th colspan="3">
-    Views:<%= @job.status %>
-  </th>
-  </tr>
-    </thead>
-</table>
 
-<div class="head50">
-    Bookmarks:
-    <%= @job.status %>
-</div>
-<div class="head50">
-    Views:<%= @job.status %>
-</div>
-<style>
-.head50{
-  display: inline;
-  width: 50%;
-}
-</style>
-
-</div>
 </br>
 </br>
     <div class="row">
@@ -84,20 +80,57 @@
         <div class="blog-post">
           <h2 class="blog-post-title">Description</h2>
 
-          <p><%= @job.descriptionV2 %></p></br>
+          <%if @job.description!= nil %>
+            <%= @job.description.html_safe %>
+          <%end%>
+
+          <%if @job.descriptionV2!= nil %>
+            <%if @job.descriptionV2["learn"]!= nil %>
+            <p><%= @job.descriptionV2["learn"]["data"][0]["data"]["text"] %></p></br>
+            <%end%>
+            <%if @job.descriptionV2["description"] !=nil %>
+            <p><%= @job.descriptionV2["description"]["data"][0]["data"]["text"] %></p></br>
+            <%end%>
+            <%if @job.descriptionV2["opportunity"]!= nil %>
+            <p><%= @job.descriptionV2["opportunity"]["data"][0]["data"]["text"] %></p></br>
+            <%end%>
+            <%if @job.descriptionV2["requirements"] != nil %>
+            <p><%= @job.descriptionV2["requirements"]["data"][0]["data"]["text"] %></p></br>
+            <%end%>
+          <%end%>
+
+          <%if @job.descriptionHTML!= nil %>
+            <%= @job.descriptionHTML.html_safe %>
+          <%end%>
 
         </div>
 
       </div>
 
-        <div class="col-sm-3 col-sm-offset-1 blog-sidebar" >
-          <div class="sidebar-module sidebar-module-inset"style=" background-color: white; ">
+        <div class="col-sm-3 col-md-offset-1 blog-sidebar" >
+          <div class="job-rec-header"><b>Job Recommendations</b></br></div>
+            <div class="job-rec-sub-header">Similar jobs considered: </div>
+          <div class="job-recommendation"style=" background-color: white; ">
+
+          <br>
+
+
+
+          <% @final_rec_jobs.each do |jobrec| %>
+          <div class="recommended-job" style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(<%= randomized_background_image %>) no-repeat center center ; ">
+            <%= link_to job_path(id: jobrec.id) do %>
+            <b><%= jobrec.title %></b></br><%= jobrec.Company.name %></div></br>
+            <% end %>
+          <% end %>
+          </div>
+          <div class="side-bar-company"style=" background-color: white; ">
             <h2>Company</h2>
             <p><%= @job.Company.name %></p>
+
           </div>
 
 
-          <div class="sidebar-module sidebar-job-category" style= " background-color: white;" >
+          <div class="sidebar-module-sidebar-job-category" style= " background-color: white;" >
             <h2>Category</h2>
             <p><%= @job.JobCategory.name %></p>
           </div>
