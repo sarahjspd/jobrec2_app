@@ -9,8 +9,7 @@ module ApplicationHelper
     "http://wbbh.images.worldnow.com/images/14431555_G.jpg",
     "https://www.sciencedaily.com/images/2016/05/160504085309_1_900x600.jpg",
     "http://www.marcha.org.ar/wp-content/uploads/2014/12/tic-argentina-640x300.jpg",
-    "https://www.uaeadvo.com/wp-content/uploads/2014/07/Civil-Law.jpg",
-    "http://dsim.in/blog/wp-content/uploads/2017/06/sales-stats-dsim.jpg"]
+    "https://www.uaeadvo.com/wp-content/uploads/2014/07/Civil-Law.jpg"]
   images[rand(images.size)]
   end
 

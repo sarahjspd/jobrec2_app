@@ -2,8 +2,8 @@ class JobsController < ApplicationController
 
  	def index
 
-    @joblist = Job.all.where(createdAt: 30.days.ago..Time.now, status: "OPEN").order(createdAt: :desc)
-  
+    # @joblist = Job.all.where(createdAt: 30.days.ago..Time.now, status: "OPEN").order(createdAt: :desc)
+  	@joblist = Job.where(id: ApplicationScore.where(created_at: 60.days.ago..Time.now).first(50).pluck(:job_id))
   end
 
 
@@ -38,7 +38,6 @@ class JobsController < ApplicationController
 
 
 	@final_rec_id = @sorted_rec.sort_by{ |job_id, score| score }.reverse.collect(&:first).first(5)
-
 	@final_rec_jobs = Job.where(id: @final_rec_id)
 #--------------------------------------------
 #---------For User Record Creation ----------
@@ -65,7 +64,6 @@ class JobsController < ApplicationController
 		@find_record = Record.find_by(user_id: User.find_by(email: current_member.email).id, jobrec_id: session[:job_id])
 		@find_record[:applicant_id] = application.id
 		@find_record.save
-		render "show"
 		end
 
 	end
