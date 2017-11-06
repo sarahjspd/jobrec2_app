@@ -12,18 +12,6 @@
 
 <title>Blog Template for Bootstrap</title>
 
-<!-- Bootstrap core CSS -->
-<link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link href="blog.css" rel="stylesheet">
-
-<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-<script src="../../assets/js/ie-emulation-modes-warning.js"></script>
   </head>
 <body>
 <div class="site-wrapper">
@@ -46,7 +34,12 @@
     <div>
     <button type="button" style="background-color: #f2711c; color: #fff; border-color: #f2711c;" class="btn btn-primary btn-1">➦ Share</button>
     <button type="button" class="btn btn-primary btn-2">Bookmark</button>
-    <button type="button" style="background-color: #4caf50; color: #fff; border-color: #4caf50;"class="btn btn-primary btn-3">✓ Apply</button>
+<!-- added link to apply -->
+    <%= link_to jobs_path, method: :post do %>
+      <button type="button" style="background-color: #4caf50; color: #fff; border-color: #4caf50;"class="btn btn-primary btn-3">✓ Apply</button>
+    <% end %>
+<!-- added link to apply -->
+
     </div>
   </br>
   </br>

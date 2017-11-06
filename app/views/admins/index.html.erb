@@ -1,4 +1,56 @@
-<h3>Admin Page</h3>
+<h3><center>Admin Page</center></h3>
 
 
-<%= link_to "Update My Scores", admins_path, method: :post, class:"btn btn-success"%>
+<center><%= link_to "Update My Scores", recrefreshes_path, method: :post, class:"btn btn-success"%></center>
+
+<h3><center>Job Recommendation Engine Check</center></h3>
+
+<br>
+<div class="row">
+	<div class="col-sm-3 recordstabledata">
+		<h3>Recommendations Till Date</h3>
+		<div>No. of Jobs: <code><small><%= @recommended_jobs_till_date %></small></code></div>
+		<div>No. of Users: <code><small><%= @recommended_jobs_till_date_users %></small></code></div>
+		<br>
+		<h3>Quick Summary:</h3>
+		<div><b>< 1 Day:</b></div>
+		<div>Categories: <%= Job.find(1660).JobCategory.name %></div>
+		<div>Average Applications Per User: <%= @matches.pluck(:applicant_id).uniq.count/@matches.pluck(:user_id).uniq.count %></div>
+		<div>Average Applications Per Day: </div>
+		<br>
+		<div><b>2 to 7 Days:</b></div>
+		<div>Categories: Marketing, Finance, Engineering</div>
+		<div>Average Applications Per User: 1</div>
+		<div>Average Applications Per Day: 27</div>
+
+
+
+
+	</div>
+
+	<div class="col-sm-8 logsdata">
+
+		<h3>User Logs</h3>
+
+		<br>
+
+
+			<table class="table table-hover">
+				<thead>
+					<th>User</th>
+					<th>Job</th>
+					<th>Time taken to Apply after recommendation</th>
+				</thead>
+				<tbody>
+					<% @matches.order(updated_at: :desc).each do |match| %>
+					<tr>
+						<td><center><%= User.find(match.user_id).email %></center></td>
+						<td><center><%= Job.find(match.jobrec_id).title %></center></td>
+						<td><center><%= distance_of_time_in_words(match.created_at, match.updated_at) %></center></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+
+	</div>
+</div>

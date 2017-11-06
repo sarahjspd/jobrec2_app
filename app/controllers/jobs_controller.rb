@@ -1,14 +1,9 @@
 class JobsController < ApplicationController
 
-
-
-
-
  	def index
 
     @joblist = Job.all.where(createdAt: 30.days.ago..Time.now, status: "OPEN").order(createdAt: :desc)
-
-    
+  
   end
 
 
@@ -16,11 +11,14 @@ class JobsController < ApplicationController
 
 
    	@job = Job.find(params[:id])
+   	session[:job_id] = params[:id]
+
       @skill = @job.Skills.pluck(:name)
 
 
 
  #------For Job Recommendation-------------
+   	
    	@jobshow = params[:id]
    	@skill_score =
    	if current_member == nil
@@ -50,11 +48,25 @@ class JobsController < ApplicationController
 
 			rec_id = records[0]
 			score = records[1]
-			Record.create(user_id: User.find_by(email: current_member.email).id, job_id: @jobshow, jobrec_id: rec_id, savedscore: score)
+			Record.delay.create(user_id: User.find_by(email: current_member.email).id, job_id: @jobshow, jobrec_id: rec_id, savedscore: score)
+			flash[:notice] = "Application Successful!"
 		end
 	end
 
+	render "show"	
+	end
 
+
+	def create
+		application = Application.create(note: "testing", ApplicantId: User.find_by(email: current_member.email).id, JobId: session[:job_id], attachments: nil, status: "NEW", createdAt: Time.now, updatedAt: Time.now)
+
+		if application.save
+
+		@find_record = Record.find_by(user_id: User.find_by(email: current_member.email).id, jobrec_id: session[:job_id])
+		@find_record[:applicant_id] = application.id
+		@find_record.save
+		render "show"
+		end
 
 	end
 
