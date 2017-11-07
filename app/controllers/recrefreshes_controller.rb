@@ -3,18 +3,20 @@ class RecrefreshesController < ApplicationController
 	def create
 		
 		# A Variable ----------------------------------------------------------------
-   	
-#GenerateApplicationScoreService.new.call
+# ApplicationScore.destroy_all  	
+# GenerateApplicationScoreService.new.call
 			
 		# B Variable ----------------------------------------------------------------
-	   
+BookmarkScore.destroy_all
 GenerateBookmarkScoreService.new.call
 	   
  		# C Variable ----------------------------------------------------------------
-#GenerateCategoryScoreService.new.call
+# CategoryScore.destroy_all
+# GenerateCategoryScoreService.new.call
  	
 	    # S Variable ----------------------------------------------------------------
-#GenerateSkillScoreService.new.call
+# SkillScore.destroy_all
+# GenerateSkillScoreService.new.call
 	redirect_to admins_path
 	end
 

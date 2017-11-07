@@ -3,9 +3,9 @@ class GenerateApplicationScoreService
 	def call
 
 		# @job = Job.find(params[:id])
-	   	jobs = Job.all.where(status: "OPEN").limit(100)   	
+	   	jobs = Job.all.where(status: "OPEN", createdAt: 90.days.ago..Time.now)	
 	   	
-	   	jobs.find_each(batch_size: 10) do |eachjob|
+	   	jobs.find_each do |eachjob|
 	   		generate_scores_for_one_job(eachjob)
 	   	end
 	end

@@ -3,7 +3,7 @@ class JobsController < ApplicationController
  	def index
 
     # @joblist = Job.all.where(createdAt: 30.days.ago..Time.now, status: "OPEN").order(createdAt: :desc)
-  	@joblist = Job.where(id: ApplicationScore.where(created_at: 60.days.ago..Time.now).first(50).pluck(:job_id))
+  	@joblist = Job.where(createdAt: 60.days.ago..Time.now, status: "OPEN").first(50)
   end
 
 

@@ -1,7 +1,7 @@
 class GenerateSkillScoreService
 
 	def call
-		@user = User.all.where(role: "CANDIDATE").limit(50) #remove first(2)
+		@user = User.all.where(role: "CANDIDATE").limit(200) #remove first(2)
 		
 		@user.find_each(batch_size: 10) do |eachuser|
 	    generate_user_skill_score(eachuser)
@@ -10,8 +10,8 @@ class GenerateSkillScoreService
 	########
 	#else
 	########
-	  job = Job.all.where(createdAt: 60.days.ago..Time.now, status: "OPEN").order(createdAt: :desc).limit(50) #remove first(1)
-		job.find_each(batch_size: 10) do |x|
+	  job = Job.all.where(createdAt: 60.days.ago..Time.now, status: "OPEN").order(createdAt: :desc) #remove first(1)
+		job.find_each do |x|
 			generate_job_skill_score(x) 
 		end
 	end
@@ -24,7 +24,7 @@ class GenerateSkillScoreService
     all_job = Job.all.where(createdAt: 30.days.ago..Time.now, status: "OPEN").order(createdAt: :desc)
     array_of_skills = []
     array_of_jobid=[]
-    all_job.find_each(batch_size: 10) do |getarray|
+    all_job.find_each do |getarray|
       allarray= getarray.Skills.pluck(:id)
       array_of_skills << allarray
 
@@ -89,7 +89,7 @@ class GenerateSkillScoreService
     array_of_skills = []
     array_of_jobid=[]
 
-		Job.where(id: a).find_each(batch_size: 10) do |getarray|
+		Job.where(id: a).find_each do |getarray|
       allarray= getarray.Skills.pluck(:id)
       array_of_skills << allarray
     end
