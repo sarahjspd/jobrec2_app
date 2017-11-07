@@ -119,13 +119,16 @@
           <% @final_rec_id.each do |jobid| %>
           <div class="recommended-job" style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(<%= randomized_background_image %>) no-repeat center center ; ">
             <%= link_to job_path(id: jobid) do %>
-            <b style="font-size: 15px;font-family: 'Lato', sans-serif;"><%= Job.find(jobid).title %></b></br><%= Job.find(jobid).Company.name %></br><i style="font-size: 14px;"><%= randomized_background_salary %></i></div></br>
+            <b style="font-size: 14px;font-family: 'Lato', sans-serif;"><%= Job.find(jobid).title.upcase  %></b></br>
+            <div style="padding-left: 5px;">
+            <%= Job.find(jobid).Company.name %></br><i style="font-size: 14px;"><%= randomized_background_salary %></i></div>
             <% end %>
+          </div></br>
           <% end %>
           </div>
-          <div class="side-bar-company"style=" background-color: white; ">
+          <div class="side-bar-company"style=" background-color: white; font-size: 12px;">
             <h2>Company</h2>
-            <p><%= @job.Company.name %></p>
+            <p ><%= @job.Company.name %></p>
 
           </div>
 
