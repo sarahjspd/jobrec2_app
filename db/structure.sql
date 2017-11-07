@@ -5495,7 +5495,7 @@ ALTER TABLE ONLY bookmark_scores
 --
 
 ALTER TABLE ONLY category_scores
-    ADD CONSTRAINT fk_rails_d3eec071e6 FOREIGN KEY (originaljob_id) REFERENCES "Jobs"(id);
+    ADD CONSTRAINT fk_rails_d3eec071e6 FOREIGN KEY (originaljob_id) REFERENCES "JobCategories"(id);
 
 
 --

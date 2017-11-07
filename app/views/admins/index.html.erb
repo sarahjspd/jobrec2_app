@@ -1,18 +1,31 @@
-<h3><center>Admin Page</center></h3>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
+</head>
+<body background="https://gweb-earth.storage.googleapis.com/assets/hero@2x.jpg";
+style="background-size: cover; font-family: 'Open Sans', sans-serif;"></div>
+<div class="admin-head" style="background-color: rgba(0, 0, 0, 0.8); text-align: center;    padding-bottom: 20px;
+    padding-top: 10px;">
+<h3 style="color: white;  " >Admin Page</h3>
 
 
-<center><%= link_to "Update My Scores", recrefreshes_path, method: :post, class:"btn btn-success"%></center>
+<%= link_to "Update My Scores", recrefreshes_path, method: :post, class:"btn btn-success"%>
 
-<h3><center>Job Recommendation Engine Check</center></h3>
 
+</div>
+<h3 style="color: white; font-size: 60px; font-family: 'Source Code Pro', monospace;"><center>
+	Recommendation Engine Check</center></h3>
 <br>
-<div class="row">
-	<div class="col-sm-3 recordstabledata">
-		<h3>Recommendations Till Date</h3>
+<div class="row" style="">
+	<div class="col-sm-3 recordstabledata" style="background-color: rgba(0, 0, 0, 0.8);">
+		<div class="recommendation-till-date" style=" color: white; font-size: 18px;  ">
+		<h3>Recommendations Till Date :</h3>
 		<div>No. of Jobs: <code><small><%= @recommended_jobs_till_date %></small></code></div>
 		<div>No. of Users: <code><small><%= @recommended_jobs_till_date_users %></small></code></div>
+	</div>
 		<br>
-		<h3>Quick Summary:</h3>
+		<div class="quick-summary" style=" color: white;font-size: 18px; ">
+		<h3>Quick Summary :</h3>
 		<div><b>< 1 Day:</b></div>
 		<div>Categories: <%= Job.find(1660).JobCategory.name %></div>
 		<div>Average Applications Per User: <%= @matches.pluck(:applicant_id).uniq.count/@matches.pluck(:user_id).uniq.count %></div>
@@ -22,6 +35,14 @@
 		<div>Categories: Marketing, Finance, Engineering</div>
 		<div>Average Applications Per User: 1</div>
 		<div>Average Applications Per Day: 27</div>
+		</br>
+	</br><center>
+		<img src="http://noosphere.princeton.edu/images/movie256_b.gif" alt="."
+		style="width: 200px;
+						height: 200px;
+						border-radius: 50%;"></center>
+		</br>
+	</div>
 
 
 
@@ -29,17 +50,17 @@
 	</div>
 
 	<div class="col-sm-8 logsdata">
-
-		<h3>User Logs</h3>
+		<div class="user-log" style="background-color: rgba(0, 0, 0, 0.8); color: white;font-size: 18px; ">
+		<h3 style="padding:10px;">User Logs :</h3>
 
 		<br>
 
 
-			<table class="table table-hover">
+			<table class="table" >
 				<thead>
-					<th>User</th>
-					<th>Job</th>
-					<th>Time taken to Apply after recommendation</th>
+					<th><center>User</center></th>
+					<th><center>Job</center></th>
+					<th><center>Time taken to Apply after recommendation</center></th>
 				</thead>
 				<tbody>
 					<% @matches.order(updated_at: :desc).each do |match| %>
@@ -52,5 +73,7 @@
 				</tbody>
 			</table>
 
+
+		</div>
 	</div>
 </div>

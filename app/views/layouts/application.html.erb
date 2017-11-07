@@ -30,7 +30,6 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right" style=" font-size: small;     color: white;" >
-            <%= link_to "Admin", admins_path %>
             <% if member_signed_in? %>
             <stong style="color: grey;"><%= current_member.email %></strong>
             <button type="button" class="btn btn-primary btn-1"><%= link_to 'Edit profile', edit_member_registration_path, :class => 'navbar-link' %>
@@ -39,6 +38,8 @@
             <button type="button" class="btn btn-primary btn-1" style="border-color: green;"><%= link_to "Sign up", new_member_registration_path, :class => 'navbar-link'  %>
               <button type="button" class="btn btn-primary"><%= link_to "Login", new_member_session_path, :class => 'navbar-link'  %>
             <% end %>
+            <button type="button" class="btn btn-success" style=" color: white; background-color: gray; border:gray;"><%= link_to "Admin", admins_path %></button>
+
               </ul>
             </li>
           </ul>

@@ -25,5 +25,17 @@ module ApplicationHelper
   images[rand(images.size)]
   end
 
+  def randomized_background_salary
+  salary = ["SGD 1600 - 2800  (BASIC) 2 vacancies",
+    "SGD 8000 - 12000  (BASIC) 1 vacancy",
+    "SGD 1500 - 1500  (BASIC) 3 vacancies",
+    "SGD 3000 - 5000  (BASIC) 7 vacancies",
+    "SGD 2200 - 3000  (BASIC) 1 vacancy",
+    "SGD 2000 - 3000  (BASIC) 2 vacancies",
+    "SGD 3000 - 4800  (BASIC) 1 vacancy",
+    "SGD 1800 - 2000  (BASIC) 3 vacancies"]
+  salary[rand(salary.size)]
+  end
+
 
 end

@@ -11,7 +11,7 @@
 <link rel="icon" href="../../favicon.ico">
 
 <title>Blog Template for Bootstrap</title>
-
+<link href="https://fonts.googleapis.com/css?family=Lato:700" rel="stylesheet">
   </head>
 <body>
 <div class="site-wrapper">
@@ -119,7 +119,7 @@
           <% @final_rec_id.each do |jobid| %>
           <div class="recommended-job" style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(<%= randomized_background_image %>) no-repeat center center ; ">
             <%= link_to job_path(id: jobid) do %>
-            <b><%= Job.find(jobid).title %></b></br><%= Job.find(jobid).Company.name %></div></br>
+            <b style="font-size: 15px;font-family: 'Lato', sans-serif;"><%= Job.find(jobid).title %></b></br><%= Job.find(jobid).Company.name %></br><i style="font-size: 14px;"><%= randomized_background_salary %></i></div></br>
             <% end %>
           <% end %>
           </div>
