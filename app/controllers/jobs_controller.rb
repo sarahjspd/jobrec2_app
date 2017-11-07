@@ -4,6 +4,8 @@ class JobsController < ApplicationController
 
     # @joblist = Job.all.where(createdAt: 30.days.ago..Time.now, status: "OPEN").order(createdAt: :desc)
   	@joblist = Job.where(createdAt: 60.days.ago..Time.now, status: "OPEN").first(50)
+    selected_jobs= [1, 11, 22, 36, 54, 68]
+    @job=Job.where(id: selected_jobs)
   end
 
 
@@ -18,7 +20,7 @@ class JobsController < ApplicationController
 
 
  #------For Job Recommendation-------------
-   	
+
    	@jobshow = params[:id]
    	@skill_score =
    	if current_member == nil
@@ -52,7 +54,7 @@ class JobsController < ApplicationController
 		end
 	end
 
-	render "show"	
+	render "show"
 	end
 
 
