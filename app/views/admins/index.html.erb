@@ -7,9 +7,9 @@ style="background-size: cover; font-family: 'Open Sans', sans-serif;"></div>
 <div class="admin-head" style="background-color: rgba(0, 0, 0, 0.8); text-align: center;    padding-bottom: 20px;
     padding-top: 10px;">
 <h3 style="color: white;  " >Admin Page</h3>
-
-
+<!-- Update Score table button -->
 <%= link_to "Update My Scores", recrefreshes_path, method: :post, class:"btn btn-success"%>
+<div class="lastrefreshtime">Last Refresh: <%= [CategoryScore.last.created_at, ApplicationScore.last.created_at, BookmarkScore.last.created_at,SkillScore.last.created_at].max.in_time_zone("Asia/Singapore").strftime("%d/%m/%y %H:%M:%S") %></div>
 
 
 </div>
@@ -19,22 +19,61 @@ style="background-size: cover; font-family: 'Open Sans', sans-serif;"></div>
 <div class="row" style="">
 	<div class="col-sm-3 recordstabledata" style="background-color: rgba(0, 0, 0, 0.8);">
 		<div class="recommendation-till-date" style=" color: white; font-size: 18px;  ">
-		<h3>Recommendations Till Date :</h3>
+		<center><h3>Recommendations Till Date :</h3>
 		<div>No. of Jobs: <code><small><%= @recommended_jobs_till_date %></small></code></div>
-		<div>No. of Users: <code><small><%= @recommended_jobs_till_date_users %></small></code></div>
+		<div>No. of Users: <code><small><%= @recommended_jobs_till_date_users %></small></code></div></center>
 	</div>
 		<br>
 		<div class="quick-summary" style=" color: white;font-size: 18px; ">
-		<h3>Quick Summary :</h3>
-		<div><b>< 1 Day:</b></div>
-		<div>Categories: <%= Job.find(1660).JobCategory.name %></div>
-		<div>Average Applications Per User: <%= @matches.pluck(:applicant_id).uniq.count/@matches.pluck(:user_id).uniq.count %></div>
-		<div>Average Applications Per Day: </div>
-		<br>
-		<div><b>2 to 7 Days:</b></div>
-		<div>Categories: Marketing, Finance, Engineering</div>
-		<div>Average Applications Per User: 1</div>
-		<div>Average Applications Per Day: 27</div>
+		<!-- User Stats -->
+ 		<div><h4>< 24 Hours:</h4></div>
+		<table class ="table">
+			<thead>
+				<th><center>Categories</center></th>
+				<th><center>Applications</center></th>
+				<th><center>Top Jobs</center></th>
+			</thead>
+			<tbody>
+				<tr>
+					<td><center>
+					<!-- Can adjust the number of Job Categories to show -->
+						<% JobCategory.where(id: Job.where(id: @matches_lessoneday.pluck(:jobrec_id)).pluck(:JobCategoryId).uniq).first(2).each do |jobcategoryless| %>
+							<div>- <%= jobcategoryless.name %></div>
+						<% end %>
+					</center></td>
+					<td><center><%= @matches_lessoneday.count %></center></td>
+					<td><center>
+						<% @matches_lessoneday_topjob.each do |topjobless| %>
+							<div>- <%= topjobless.title %></div>
+						<% end %>
+					</center></td>
+				</tr>
+			</tbody>
+		</table>
+		<div><h4>1 to 7 Days:</h4></div>
+		<table class ="table">
+			<thead>
+				<th><center>Categories</center></th>
+				<th><center>Applications</center></th>
+				<th><center>Top Jobs</center></th>
+			</thead>
+			<tbody>
+				<tr>
+					<td><center>
+					<!-- Can adjust the number of Job Categories to show -->
+						<% JobCategory.where(id: Job.where(id: @matches_moreoneday.pluck(:jobrec_id)).pluck(:JobCategoryId).uniq).first(2).each do |jobcategorymore| %>
+							<div>- <%= jobcategorymore.name %></div>
+						<% end %>
+					</center></td>
+					<td><center><%= @matches_moreoneday.count %></center></td>
+					<td><center>
+						<% @matches_moreoneday_topjob.each do |topjobmore| %>
+							<div>- <%= topjobmore.title %></div>
+						<% end %>
+					</center></td>
+				</tr>
+			</tbody>
+		</table>
 		</br>
 	</br><center>
 		<img src="http://noosphere.princeton.edu/images/movie256_b.gif" alt="."
@@ -43,31 +82,25 @@ style="background-size: cover; font-family: 'Open Sans', sans-serif;"></div>
 						border-radius: 50%;"></center>
 		</br>
 	</div>
-
-
-
-
 	</div>
 
 	<div class="col-sm-8 logsdata">
 		<div class="user-log" style="background-color: rgba(0, 0, 0, 0.8); color: white;font-size: 18px; ">
-		<h3 style="padding:10px;">User Logs :</h3>
+		<h3 style="padding:10px; margin-top: inherit;"><center>User Logs :</center></h3>
 
-		<br>
-
-
-			<table class="table" >
+			<table class="table">
 				<thead>
 					<th><center>User</center></th>
 					<th><center>Job</center></th>
 					<th><center>Time taken to Apply after recommendation</center></th>
 				</thead>
 				<tbody>
+					<!-- User Logs  -->
 					<% @matches.order(updated_at: :desc).each do |match| %>
 					<tr>
-						<td><center><%= User.find(match.user_id).email %></center></td>
-						<td><center><%= Job.find(match.jobrec_id).title %></center></td>
-						<td><center><%= distance_of_time_in_words(match.created_at, match.updated_at) %></center></td>
+						<td><center><i><%= User.find(match.user_id).email %></i></center></td>
+						<td><center><i><%= Job.find(match.jobrec_id).title %></i></center></td>
+						<td><center><i><%= distance_of_time_in_words(match.created_at, match.updated_at) %></i></center></td>
 					</tr>
 					<% end %>
 				</tbody>

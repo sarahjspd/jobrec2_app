@@ -35,8 +35,14 @@
     <button type="button" style="background-color: #f2711c; color: #fff; border-color: #f2711c;" class="btn btn-primary btn-1">➦ Share</button>
     <button type="button" class="btn btn-primary btn-2">Bookmark</button>
 <!-- added link to apply -->
-    <%= link_to jobs_path, method: :post do %>
-      <button type="button" style="background-color: #4caf50; color: #fff; border-color: #4caf50;"class="btn btn-primary btn-3">✓ Apply</button>
+    <% if member_signed_in? %>
+      <%= link_to jobs_path, method: :post do %>
+        <button type="button" style="background-color: #4caf50; color: #fff; border-color: #4caf50;"class="btn btn-primary btn-3">✓ Apply</button>
+      <% end %>
+    <% else %>
+      <%= link_to jobs_path, method: :post do %>
+        <button type="button" disabled="disabled" data-toggle="tooltip" title="Please Sign in to Apply" style="background-color: #4caf50; color: #fff; border-color: #4caf50;"class="btn btn-primary btn-3">✓ Apply</button>
+      <% end %>
     <% end %>
 <!-- added link to apply -->
 
@@ -85,16 +91,16 @@
           <%end%>
 
           <%if @job.descriptionV2!= nil %>
-            <%if @job.descriptionV2["learn"]!= nil %>
+            <%if !@job.descriptionV2["learn"].any? && @job.descriptionV2["learn"]!= nil %>
             <p><%= @job.descriptionV2["learn"]["data"][0]["data"]["text"] %></p></br>
             <%end%>
-            <%if @job.descriptionV2["description"] !=nil %>
+            <%if !@job.descriptionV2["description"].any? && @job.descriptionV2["description"] !=nil %>
             <p><%= @job.descriptionV2["description"]["data"][0]["data"]["text"] %></p></br>
             <%end%>
-            <%if @job.descriptionV2["opportunity"]!= nil %>
+            <%if !@job.descriptionV2["opportunity"].any? && @job.descriptionV2["opportunity"]!= nil %>
             <p><%= @job.descriptionV2["opportunity"]["data"][0]["data"]["text"] %></p></br>
             <%end%>
-            <%if @job.descriptionV2["requirements"] != nil %>
+            <%if !@job.descriptionV2["requirements"].any? && @job.descriptionV2["requirements"] != nil %>
             <p><%= @job.descriptionV2["requirements"]["data"][0]["data"]["text"] %></p></br>
             <%end%>
           <%end%>
@@ -115,14 +121,15 @@
           <br>
 
 
-
+          <!-- The Final Recommended Jobs -->
           <% @final_rec_id.each do |jobid| %>
           <div class="recommended-job" style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(<%= randomized_background_image %>) no-repeat center center ; ">
             <%= link_to job_path(id: jobid) do %>
-            <b style="font-size: 14px;font-family: 'Lato', sans-serif;"><%= Job.find(jobid).title.upcase  %></b></br>
-            <div style="padding-left: 5px;">
+            <b style="font-size: 14px;font-family: 'Lato', sans-serif;color: white;"><%= Job.find(jobid).title.upcase  %></b></br>
+            <div style="padding-left: 5px;color: white;">
             <%= Job.find(jobid).Company.name %></br><i style="font-size: 14px;"><%= randomized_background_salary %></i></div>
             <% end %>
+          <!-- The Final Recommended Jobs --> 
           </div></br>
           <% end %>
           </div>

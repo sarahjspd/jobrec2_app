@@ -49,14 +49,14 @@
     border-color: #2e6da4;
     margin-right: 10px;
 }
-a {
-    color: white;
 
-}
 .navbar-right {
     float: right !important;
     margin-right: -15px;
     margin-top: 10px;
+    a{
+  color: white;
+}
 }
 
 .navbar-default .navbar-link {
@@ -250,9 +250,24 @@ margin: auto;
   a:hover {text-decoration: none;}
 }
 
+
 .job-desc{
   padding-left: 10px;
   a:link {color: black;}
   a:hover {text-decoration: none;}
+
+  a {
+    p {
+      color: black;
+    }
+  }
+
+
+}
+
+.lastrefreshtime {
+  
+  color: white;
+  padding-top: 15px;
 
 }
