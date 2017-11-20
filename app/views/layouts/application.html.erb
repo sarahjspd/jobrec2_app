@@ -31,7 +31,7 @@
 
           <ul class="nav navbar-nav navbar-right" style=" font-size: small;     color: white;" >
             <% if member_signed_in? %>
-            <stong style="color: grey;"><%= current_member.email %></strong>
+            <stong style="color: grey;">Hi <%= User.find_by(email: current_member.email).firstName.upcase %> || </strong>
             <button type="button" class="btn btn-primary btn-1"><%= link_to 'Edit profile', edit_member_registration_path, :class => 'navbar-link' %>
             <button type="button" class="btn btn-primary"><%= link_to "Logout", destroy_member_session_path, method: :delete, :class => 'navbar-link'   %>
             <% else %>

@@ -17,6 +17,7 @@ class GenerateCategoryScoreService
 	private
 
 	def generate_scores_for_one_job(job)
+    
 		@jobcategory = job.JobCategoryId
 
     array_of_jobid = ApplicationScore.where(originaljob_id: job.id).pluck(:job_id)
@@ -31,13 +32,11 @@ class GenerateCategoryScoreService
       else
         matched_count =0
       end
-
+      # The number 0.5 below is the multiplier based on the importance of the Job Category Variable in the User journey, can be changed.
       matched_category_score = matched_count*0.5
       t.insert(2, matched_category_score)
     end
-#[1, 5, 0.5]
     array_of_jobid_and_categoryid.each do |catscore|
-
 
         jobid = catscore[0]
         score = catscore[2]
@@ -47,8 +46,6 @@ class GenerateCategoryScoreService
         CategoryScore.create( originaljob_id: originaljob, job_id: jobid, cscore: score)
       	end
     end
-
-
 	end
 
   def generate_scores_for_one_bookmark_job(job)
@@ -66,13 +63,11 @@ class GenerateCategoryScoreService
       else
         matched_count =0
       end
-
+      # The number 0.5 below is the multiplier based on the importance of the Job Category Variable in the User journey, can be changed.
       matched_category_score = matched_count*0.5
       t.insert(2, matched_category_score)
     end
-#[1, 5, 0.5]
     array_of_jobid_and_categoryid.each do |catscore|
-
 
         jobid = catscore[0]
         score = catscore[2]
@@ -82,12 +77,5 @@ class GenerateCategoryScoreService
         CategoryScore.create( originaljob_id: originaljob, job_id: jobid, cscore: score)
         end
     end
-
-
   end
-
-
-
-
-
 end

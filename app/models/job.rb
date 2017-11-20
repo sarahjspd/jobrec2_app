@@ -26,5 +26,4 @@ class Job < ApplicationRecord
   belongs_to :Company, :foreign_key => 'CompanyId'
   belongs_to :JobCategory, :foreign_key => 'JobCategoryId'
   belongs_to :City, :foreign_key => 'CityId'
-
 end
